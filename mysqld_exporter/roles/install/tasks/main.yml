@@ -1,0 +1,13 @@
+---
+- name: Download node_exporter package
+  get_url:
+    url: https://github.com/prometheus/mysqld_exporter/releases/download/v0.12.1/mysqld_exporter-0.12.1.linux-amd64.tar.gz
+    dest: /tmp/mysqld_exporter-0.12.1.linux-amd64.tar.gz
+
+- name: Unpack node_exporter tar
+  unarchive:
+    src: /tmp/mysqld_exporter-0.12.1.linux-amd64.tar.gz
+    dest: /tmp/mysqld_exporter
+
+- name: Move node_exporter binary to /usr/local/bin
+  command: mv /tmp/mysqld_exporter/mysqld_exporter /usr/local/bin/mysqld_exporter

@@ -1,0 +1,24 @@
+---
+- name: Add node_exporter group
+  group:
+    name: node_exporter
+    state: present
+
+- name: Add node_exporter user
+  user:
+    name: node_exporter
+    group: node_exporter
+    state: present
+    system: yes
+
+- name: Copy service file
+  copy:
+    src: node_exporter.service
+    dest: /etc/systemd/system/node_exporter.service
+
+- name: Start node_exporter service
+  systemd:
+    name: node_exporter
+    state: started
+    enabled: yes
+    daemon_reload: yes

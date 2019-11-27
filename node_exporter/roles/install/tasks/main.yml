@@ -1,0 +1,14 @@
+---
+- name: Download node_exporter package
+  get_url:
+    url: https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz
+    dest: /tmp/node_exporter-0.18.1.tar.gz
+
+- name: Unpack node_exporter tar
+  unarchive:
+    src: /tmp/node_exporter-0.18.1.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: Move node_exporter binary to /usr/local/bin
+  command: mv /tmp/node_exporter-0.18.1.linux-amd64/node_exporter /usr/local/bin/node_exporter
